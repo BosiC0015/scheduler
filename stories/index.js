@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -17,6 +17,7 @@ import Show from "components/Appointment/Show"
 import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
+import Form from "components/Appointment/Form";
 
 storiesOf("Button", module)
   .addParameters({
@@ -148,17 +149,39 @@ storiesOf("Appointment", module)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="12pm" />)
   .add("Empty", () => <Empty onAdd={action("onAdd")} />)
-  .add("Show", () => (
-    <Show 
-      onEdit={action("onEdit")} 
-      onDelete={action("onDelete")} 
-    />
-    ))
-  .add("Confirm", () => (
-    <Confirm
-      onCancel={action("onCancel")}
-      onConfirm={action("onConfirm")}
-    />
-  ))
+  .add("Show", () => <Show onEdit={action("onEdit")} onDelete={action("onDelete")} />)
+  .add("Confirm", () => <Confirm onCancel={action("onCancel")} onConfirm={action("onConfirm")} />)
   .add("Status", () => <Status />)
   .add("Error", () => <Error onClose={action("onClose")} />)
+  .add("Create", () => (
+    <Form 
+      interviewers={interviewers}
+      onCancel={action("onCancel")}
+      onSave={action("onSave")} 
+    />
+  ))
+  .add("Edit", () => (
+    <Form 
+      student={"Lydia Miller-Jones"}
+      interviewers={interviewers}
+      interviewer={3}
+      onCancel={action("onCancel")}
+      onSave={action("onSave")} 
+    />
+  ))
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="4pm" />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="4pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer }}
+      />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
