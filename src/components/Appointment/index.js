@@ -6,10 +6,11 @@ import Empty from "./Empty";
 import "components/Appointment/styles.scss";
 
 export default function Appointment(props) {
+  console.log(props)
   return (
     <article className="appointment">
-      <Header {...props} />
-      {props.interview ? <Show /> : <Empty />}
+      <Header time={props.time} />
+      {props.interview ? <Show {...props.interview} /> : <Empty />}
     </article>
   );
 }
