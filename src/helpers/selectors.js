@@ -13,6 +13,21 @@ export function getAppointmentsForDay(state, day) {
   return result;
 }
 
+export function getInterviewersForDay(state, day) {
+  //... returns an array of interviewers for that day
+  const result = [];
+  state.days.forEach(elm => {
+    if (elm.name === day) {
+      for (const key of elm.interviewers) {
+        if (Object.keys(state.interviewers).includes(key.toString())) {
+          result.push(state.interviewers[key])
+        }
+      }
+    }
+  })
+  return result;
+}
+
 export function getInterview(state, interview) {
   const result = {};
   const interviewerIDs = Object.keys(state.interviewers)
