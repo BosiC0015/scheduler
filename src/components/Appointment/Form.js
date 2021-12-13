@@ -4,6 +4,7 @@ import InterviewerList from "components/InterviewerList";
 import "components/Appointment/styles.scss";
 
 export default function Form(props) {
+  // console.log(props);
   const [student, setStudent] = useState(props.student || '');
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
@@ -32,8 +33,7 @@ export default function Form(props) {
         </form>
         <InterviewerList 
           interviewers={props.interviewers}
-          value={props.interviewer}
-          selected={interviewer === props.interviewer}
+          value={interviewer}
           onChange={setInterviewer}
         />
       </section>
