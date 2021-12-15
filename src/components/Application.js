@@ -65,9 +65,9 @@ export default function Application(props) {
   const cancelInterview = (id) => {
     const appointments = { ...state.appointments[id], interview: null }
 
-    axios
-      .delete(`/api/appointments/${id}`)
-      .then(() => console.log(`delete at ${id}`))
+    // axios
+    //   .delete(`/api/appointments/${id}`)
+    //   .then(() => console.log(`delete at ${id}`))
   }
 
   const appointmentList = dailyAppointments.map(appointment => {
