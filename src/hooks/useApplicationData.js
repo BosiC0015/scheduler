@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getAppointmentsForDay } from "helpers/selectors";
 
 const { useState, useEffect } = require("react");
 
@@ -50,7 +51,6 @@ export default function useApplicationData() {
   } 
 
   const cancelInterview = (id) => {
-    console.log(`delete at appointment id ${id}`)
     const appointment = { ...state.appointments[id], interview: null }
     const appointments = { ...state.appointments, [id]: appointment }
     setState({ ...state, appointments })
@@ -62,5 +62,18 @@ export default function useApplicationData() {
     //   })
   }
 
-  return { state, setDay, bookInterview, cancelInterview }
+  const updateSpots = () => {
+    for (const dayObj of state.days) {
+      const dailyInterviews = getAppointmentsForDay(state, dayObj.name)
+      let updatedSpots = 0
+      for (const appointment of dailyInterviews) {
+        if (!appointment.interview) {
+          updatedSpots += 1;
+        }
+      }
+      dayObj.spots = updatedSpots;
+    }
+  }
+
+  return { state, setDay, bookInterview, cancelInterview, updateSpots }
 }
