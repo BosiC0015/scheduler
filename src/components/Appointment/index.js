@@ -6,12 +6,14 @@ import Empty from "./Empty";
 import Form from "./Form";
 
 import "components/Appointment/styles.scss";
+import Confirm from "./Confirm";
 
 export default function Appointment(props) {
   // console.log(props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
+  const CONFIRM = "CONFIRM";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -25,6 +27,15 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview);
     transition(SHOW);
   }
+
+  const confirmDelete = () => {
+    transition(CONFIRM);
+  }
+  
+  const del = () => {
+    props.cancelInterview(props.id);
+    transition(EMPTY);
+  }
   
   return (
     <article className="appointment">
@@ -33,7 +44,7 @@ export default function Appointment(props) {
       {mode === SHOW && 
         <Show 
           {...props.interview} 
-          onDelete={props.cancelInterview}
+          onDelete={confirmDelete}
         />}
       {mode === CREATE && (
         <Form
@@ -42,6 +53,11 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
+      {mode === CONFIRM && 
+        <Confirm 
+          onCancel={() => back()}
+          onConfirm={del}
+        />}
     </article>
   );
 }
