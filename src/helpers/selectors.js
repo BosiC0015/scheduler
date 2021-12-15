@@ -37,11 +37,13 @@ export function getInterview(state, interview) {
   // console.log(interview)
   result.student = interview.student;
   result.interviewer = {}
-  interviewerIDs.forEach(elm => {
-    if (elm === interview.interviewer.toString()) {
-      result.interviewer = state.interviewers[elm]
-      return result
-    }
-  })
+  if (interview.interviewer !== null) {
+    interviewerIDs.forEach(elm => {
+      if (elm === interview.interviewer.toString()) {
+        result.interviewer = state.interviewers[elm]
+        return result
+      }
+    })
+  }
   return result;
 }
