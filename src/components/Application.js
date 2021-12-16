@@ -8,8 +8,7 @@ import { getAppointmentsForDay, getInterviewersForDay, getInterview } from "../h
 
 
 export default function Application(props) {
-  const {state, setDay, bookInterview, cancelInterview, updateSpots } = useApplicationData();
-  updateSpots();
+  const {state, setDay, bookInterview, cancelInterview } = useApplicationData();
     
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   // console.log(dailyAppointments)
