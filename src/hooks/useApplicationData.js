@@ -61,7 +61,7 @@ export default function useApplicationData() {
   const updateSpots = (state, appointments, id) => {
     let updatedState = state;
     updatedState.appointments = appointments;
-    for (const dayObj of state.days) {
+    for (const dayObj of updatedState.days) {
       const dailyInterviews = getAppointmentsForDay(updatedState, dayObj.name)
       let updatedSpots = 0
       for (const appointment of dailyInterviews) {
