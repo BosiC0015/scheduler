@@ -36,35 +36,33 @@ export default function useApplicationData() {
     })
   }, [state.day])
 
-  // console.log(state.interviewers)
+  // console.log(state)
   
   const bookInterview = (id, interview) => {
     const appointment = { ...state.appointments[id], interview: { ...interview } };
     const appointments = { ...state.appointments, [id]: appointment };
-    setState({...state, appointments})
-    
-    // axios
-    //   .put(`/api/appointments/${id}`, appointments)
-    //   .then(() => {
-    //     setState({ ...state, appointments });
-    //   })
-  } 
+    setState({ ...state, appointments })
+
+    return axios
+      .put(`/api/appointments/${id}`, { interview })
+      .then(updateSpots(state, appointments, id))
+  };
 
   const cancelInterview = (id) => {
     const appointment = { ...state.appointments[id], interview: null }
     const appointments = { ...state.appointments, [id]: appointment }
     setState({ ...state, appointments })
 
-    // axios
-    //   .delete(`/api/appointments/${id}`)
-    //   .then(() => {
-    //     setState({ ...state, appointments });
-    //   })
-  }
+    return axios
+      .delete(`/api/appointments/${id}`)
+      .then(updateSpots(state, appointments, id))
+  };
 
-  const updateSpots = () => {
+  const updateSpots = (state, appointments, id) => {
+    let updatedState = state;
+    updatedState.appointments = appointments;
     for (const dayObj of state.days) {
-      const dailyInterviews = getAppointmentsForDay(state, dayObj.name)
+      const dailyInterviews = getAppointmentsForDay(updatedState, dayObj.name)
       let updatedSpots = 0
       for (const appointment of dailyInterviews) {
         if (!appointment.interview) {
@@ -73,7 +71,7 @@ export default function useApplicationData() {
       }
       dayObj.spots = updatedSpots;
     }
-  }
+  };
 
-  return { state, setDay, bookInterview, cancelInterview, updateSpots }
+  return { state, setDay, bookInterview, cancelInterview }
 }
