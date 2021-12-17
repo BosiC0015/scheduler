@@ -41,20 +41,20 @@ export default function useApplicationData() {
   const bookInterview = (id, interview) => {
     const appointment = { ...state.appointments[id], interview: { ...interview } };
     const appointments = { ...state.appointments, [id]: appointment };
-    setState({ ...state, appointments })
 
     return axios
       .put(`/api/appointments/${id}`, { interview })
+      .then(response => setState({ ...state, interview }))
       .then(updateSpots(state, appointments, id))
   };
 
-  const cancelInterview = (id) => {
+  const cancelInterview = (id, interview) => {
     const appointment = { ...state.appointments[id], interview: null }
     const appointments = { ...state.appointments, [id]: appointment }
-    setState({ ...state, appointments })
 
     return axios
-      .delete(`/api/appointments/${id}`)
+      .delete(`/api/appointments/${id}`, { interview })
+      .then(setState({ ...state, interview }))
       .then(updateSpots(state, appointments, id))
   };
 
