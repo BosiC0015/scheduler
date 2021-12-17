@@ -54,7 +54,7 @@ export default function useApplicationData() {
 
     return axios
       .delete(`/api/appointments/${id}`, { interview })
-      .then(setState({ ...state, interview }))
+      .then(response => setState({ ...state, interview }))
       .then(updateSpots(state, appointments, id))
   };
 
