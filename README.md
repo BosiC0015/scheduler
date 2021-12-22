@@ -36,20 +36,22 @@ It is an single page application built with React. The data is fetched from an A
 
 Install dependencies with `npm install`.
 
-## Running Webpack Development Server
+### Setup the API server
+
+Fork and clone the scheduler-api[https://github.com/BosiC0015/scheduler-api] into a new directory (not within the scheduler directory), and follow the instructions.
+
+### Running the API Server
+
+```cd``` to the scheduler-api directory
 
 ```sh
 npm start
 ```
 
-## Running Jest Test Framework
+### Running the Scheduler Application
+
+```cd``` to the scheduler directory
 
 ```sh
-npm test
-```
-
-## Running Storybook Visual Testbed
-
-```sh
-npm run storybook
+npm start
 ```
