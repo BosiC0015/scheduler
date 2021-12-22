@@ -4,10 +4,10 @@ import { getAppointmentsForDay } from "helpers/selectors";
 const { useState, useEffect } = require("react");
 
 export default function useApplicationData() {
+  // set initial state
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    // you may put the line below, but will have to remove/comment hardcoded appointments variable
     appointments: {},
     interviewers: {}
   });
@@ -23,21 +23,21 @@ export default function useApplicationData() {
     setState(prev => ({ ...prev, interviewers }));
   };
 
+  // make axios requests to retreive data from server
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then((all) => {
-      // console.log(all);
       setDays([...all[0].data]);
       setAppointments(all[1].data);
       setInterviewers(all[2].data);
     })
   }, [state.day])
 
-  // console.log(state)
   
+  // function for saving an appointment to the server
   const bookInterview = (id, interview) => {
     const appointment = { ...state.appointments[id], interview: { ...interview } };
     const appointments = { ...state.appointments, [id]: appointment };
@@ -48,6 +48,7 @@ export default function useApplicationData() {
       .then(updateSpots(state, appointments, id))
   };
 
+  // function for deleting an appointment from the server
   const cancelInterview = (id, interview) => {
     const appointment = { ...state.appointments[id], interview: null }
     const appointments = { ...state.appointments, [id]: appointment }
@@ -58,6 +59,8 @@ export default function useApplicationData() {
       .then(updateSpots(state, appointments, id))
   };
 
+
+  // function for update remaining spots
   const updateSpots = (state, appointments, id) => {
     let updatedState = state;
     updatedState.appointments = appointments;

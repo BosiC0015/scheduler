@@ -8,12 +8,11 @@ import { getAppointmentsForDay, getInterviewersForDay, getInterview } from "../h
 
 
 export default function Application(props) {
-  const {state, setDay, bookInterview, cancelInterview } = useApplicationData();
-    
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  // console.log(dailyAppointments)
-  const dailyInterviewers = getInterviewersForDay(state, state.day);
-  // console.log(dailyInterviewers)
+  const {state, setDay, bookInterview, cancelInterview } = useApplicationData(); // import useApplicationData function
+  
+  const dailyAppointments = getAppointmentsForDay(state, state.day); // get an arrray of appointment for the day
+  const dailyInterviewers = getInterviewersForDay(state, state.day); // get an array of interviewers for the day
+  // get a list of appointment for the day, iterate it and pass each element to Appointment
   const appointmentList = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
 

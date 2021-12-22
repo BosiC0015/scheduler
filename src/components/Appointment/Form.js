@@ -4,21 +4,23 @@ import InterviewerList from "components/InterviewerList";
 import "components/Appointment/styles.scss";
 
 export default function Form(props) {
-  // console.log(props);
   const [student, setStudent] = useState(props.student || '');
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  // function for empty the form
   const reset = () => {
     setStudent('');
     setInterviewer(null);
   }
 
+  // combined function for reset() and props.onCancel()
   const cancel = () => {
     reset();
     props.onCancel();
   }
 
+  // function for checking that the student is not empty and interviewer is not null
   const validate = (student, interviewer) => {
     if (student === "") {
       setError("Student name cannot be blank");

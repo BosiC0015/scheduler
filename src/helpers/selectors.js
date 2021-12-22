@@ -34,7 +34,6 @@ export function getInterview(state, interview) {
   if (interview === null) {
     return null;
   }
-  // console.log(interview)
   result.student = interview.student;
   result.interviewer = {}
   if (interview.interviewer !== null) {

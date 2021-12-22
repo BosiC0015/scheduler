@@ -10,7 +10,7 @@ import Error from "./Error";
 import "components/Appointment/styles.scss";
 
 export default function Appointment(props) {
-  // console.log(props)
+  // list all the mode constants
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -21,35 +21,42 @@ export default function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
+  // import mode, transition and back function
+  // set initial mode to SHOW or EMPTY
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
+  // function called when clicking on "save"
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
-
+    // async process for saving data
     transition(SAVING);
     props
-      .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
+      .bookInterview(props.id, interview) // save data to server
+      .then(() => transition(SHOW)) // transit to SHOW mode to show the appointment
       .catch(error => transition(ERROR_SAVE, true));
   }
 
+  // function called when clicking on "delete"
   const confirmDelete = () => {
     transition(CONFIRM);
   }
   
+  // function called when confirmed to delete
   const del = () => {
+    // async process for deleting data
     transition(DELETING, true);
     props
-      .cancelInterview(props.id)
-      .then(() => transition(EMPTY))
+      .cancelInterview(props.id) // delete data from server
+      .then(() => transition(EMPTY)) // transit to EMPTY mode
       .catch(error => transition(ERROR_DELETE, true));
   }
 
+  // function called when clicking on edit button
   const edit = () => {
     transition(EDIT);
   }
