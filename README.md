@@ -42,16 +42,8 @@ Fork and clone the [scheduler-api](https://github.com/BosiC0015/scheduler-api) i
 
 ### Running the API Server
 
-In the Terminal, ```cd``` to the scheduler-api directory
-
-```sh
-npm start
-```
+In the Terminal, ```cd``` to the scheduler-api directory, and run ```npm start```
 
 ### Running the Scheduler Application
 
-In a new Terminal, ```cd``` to the scheduler directory
-
-```sh
-npm start
-```
+In a new Terminal, ```cd``` to the scheduler directory, and run ```npm start```
