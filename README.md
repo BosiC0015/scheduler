@@ -10,7 +10,7 @@ It is an single page application built with React. The data is fetched from an A
 2. The user can book an appointment on an empty spot by typing their name and select an interviewer. The spots will be updated automatically.
 !["create"](https://github.com/BosiC0015/scheduler/blob/master/public/gifs/create.gif)
 
-3. But the appointment cannot be booked when the input field is empty.
+3. But the appointment cannot be booked when the input field is empty or no interviewer is selected.
 !["validate"](https://github.com/BosiC0015/scheduler/blob/master/public/gifs/validate.gif)
 
 4. The user can also edit the details of an existing appointment. But the change can be canceled whenever before clicking on "Save".
