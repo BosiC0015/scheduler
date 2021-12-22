@@ -38,11 +38,11 @@ Install dependencies with `npm install`.
 
 ### Setup the API server
 
-Fork and clone the scheduler-api[https://github.com/BosiC0015/scheduler-api] into a new directory (not within the scheduler directory), and follow the instructions.
+Fork and clone the [scheduler-api](https://github.com/BosiC0015/scheduler-api) into a new directory (not within the scheduler directory), and follow the instructions.
 
 ### Running the API Server
 
-```cd``` to the scheduler-api directory
+In the Terminal, ```cd``` to the scheduler-api directory
 
 ```sh
 npm start
@@ -50,7 +50,7 @@ npm start
 
 ### Running the Scheduler Application
 
-```cd``` to the scheduler directory
+In a new Terminal, ```cd``` to the scheduler directory
 
 ```sh
 npm start
